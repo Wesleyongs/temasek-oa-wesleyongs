@@ -1,2 +1,19 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# dependencies
+/node_modules
+
+# built output
+/build
+/dist
+
+# IDE/Editor specific files
+/.vscode
+/.idea
+/.vs
+*.sublime-*
+*.code-workspace
+
+# Logs and debugging files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+debug.log

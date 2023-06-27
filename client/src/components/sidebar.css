@@ -1,0 +1,54 @@
+.overlay {
+  position: fixed;
+  right: -100%;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: right 0.1s ease-in-out;
+}
+
+.overlay.open {
+  right: 0;
+}
+
+.overlay__background {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  cursor: pointer;
+  z-index: 9;
+}
+
+.overlay__container {
+  background-color: #59bde1;
+  position: fixed;
+  height: 100vh;
+  width: 30vw;
+  z-index: 10;
+  right: -30vw;
+  transition: right 0.1s ease-in-out;
+}
+
+.overlay.open .overlay__container {
+  right: 0;
+}
+
+.overlay__controls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.overlay__close:after {
+  display: inline-block;
+  content: "\00d7";
+}
+
+.overlay__close {
+  border: none;
+  background-color: transparent;
+  font-size: 36px;
+  cursor: pointer;
+}
