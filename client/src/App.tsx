@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
 import Sidebar from "./components/sidebar"; // Use PascalCase for imported component name
-import { useSelector } from "react-redux";
 
 const App: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
