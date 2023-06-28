@@ -3,6 +3,7 @@ import "./sidebar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setProviders, setProvidersData } from "../state";
 import { useEffect } from "react";
+import Accordion from "./accordian";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -64,6 +65,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
       <div className={`overlay ${isOpen ? "open" : ""}`}>
         <div className={`overlay__background`} onClick={onClose} />
         <div className={`overlay__container`}>
+          <h1>Select provider</h1>
+          {providers.map((provider) => (
+            <Accordion
+              key={provider}
+              providerName={provider}
+              content="content"
+            />
+          ))}
         </div>
       </div>
     </Fragment>

@@ -1,0 +1,54 @@
+h1 {
+    text-align: center;
+    color: white;
+    size: 1rem
+  }
+
+  .content-wrapper {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+    margin-left: 1rem;
+  }
+  
+  .logo {
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 0.5em;
+  }
+  
+  .accordion {
+    border-radius: 4px;
+    margin-bottom: 10px;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    color: white;
+    /* transition: background-color 0.3s ease-in-out; */
+  }
+  
+  .accordion.open {
+    background-color: #141c24   ;
+  }
+  
+  .accordion-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: inherit;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+    
+  .accordion-header h3 {
+    margin: 0;
+  }
+  
+  .accordion-header span {
+    font-size: 12px;
+  }
+  
+  .accordion-content {
+    padding: 10px;
+  }
+  
