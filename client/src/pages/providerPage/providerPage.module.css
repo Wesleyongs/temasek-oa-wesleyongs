@@ -1,0 +1,27 @@
+.wrapper {
+  background-color: #44647b;
+  height: 100vh; /* Set the height to full viewport height */
+  padding: 2rem;
+  box-sizing: border-box; /* Include padding within the height */
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  border: black solid;
+  color: white;
+  align-items: flex-start;
+  padding: 0 2rem;
+  height: 90%; /* Adjust the height value as needed */
+  width: 80rem;
+}
+
+button {
+  margin-top: auto;
+  margin-left: auto; /* Center the button horizontally */
+    margin-right: auto; /* Center the button horizontally */
+  
+}

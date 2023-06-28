@@ -1,9 +1,8 @@
-import React, { Fragment } from "react";
-import "./sidebar.css";
+import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setProviders, setProvidersData } from "../state";
-import { useEffect } from "react";
+import { setProviders } from "../state";
 import Accordion from "./accordian";
+import "./sidebar.css";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -17,7 +16,6 @@ interface Providers {
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
   const providers: string[] = useSelector((state: any) => state.providers);
-  const providersData = useSelector((state: any) => state.providersData);
 
   /* API CALL function */
   const getProviders = async () => {
@@ -26,32 +24,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     });
     const data: Providers = await response.json();
     dispatch(setProviders({ providers: data.data }));
-  };
-
-  const getProviderData = async (providerName: string) => {
-    try {
-      const response = await fetch(
-        `https://api.apis.guru/v2/${providerName}.json`
-      );
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error(
-        `Failed to fetch data for provider: ${providerName}`,
-        error
-      );
-    }
-  };
-
-  const getProvidersData = async (providerNames: string[]) => {
-    try {
-      const promises = providerNames.map((url: string) => getProviderData(url));
-      const data = await Promise.all(promises);
-      console.log(data);
-      dispatch(setProvidersData({ providersData: data }));
-    } catch (error) {
-      console.error("Error occurred during API calls", error);
-    }
   };
 
   useEffect(() => {

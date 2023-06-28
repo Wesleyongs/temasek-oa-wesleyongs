@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   mode: "light",
   providers: [],
-  providersData: [],
+  providersInfo: {},
+  selectedProvider: "",
 };
 
 export const authSlice = createSlice({
@@ -16,11 +17,19 @@ export const authSlice = createSlice({
     setProviders: (state, action) => {
       state.providers = action.payload.providers;
     },
-    setProvidersData: (state, action) => {
-      state.providersData = action.payload.providersData;
+    addProvidersInfo: (state, action) => {
+      const { key, value } = action.payload;
+      state.providersInfo = {
+        ...state.providersInfo,
+        [key]: value,
+      };
+    },
+    setSelectedProvider: (state, action) => {
+      state.selectedProvider = action.payload;
     },
   },
 });
 
-export const { setMode, setProviders, setProvidersData } = authSlice.actions;
+export const { setMode, setProviders, addProvidersInfo, setSelectedProvider } =
+  authSlice.actions;
 export default authSlice.reducer;
