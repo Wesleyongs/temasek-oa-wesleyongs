@@ -1,22 +1,17 @@
 import React, { useState } from "react";
+import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Sidebar from "./components/sidebar"; // Use PascalCase for imported component name
+import HomePage from "./scenes/homePage";
+import ProviderPage from "./scenes/providerPage"; // Use PascalCase for imported component name
 
 const App: React.FC = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-    // fetchInformation();
-  };
   return (
-    <div className="App">
-      <div className="container">
-        <div>
-          <button onClick={toggleSidebar}>Explore web APIs</button>
-        </div>
-          <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/product/:userId" element={<ProviderPage />} />{" "}
+      </Routes>
+    </BrowserRouter>
   );
 };
 
