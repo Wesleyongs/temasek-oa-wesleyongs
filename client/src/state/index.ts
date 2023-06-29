@@ -17,7 +17,7 @@ export const authSlice = createSlice({
     setProviders: (state, action) => {
       state.providers = action.payload.providers;
     },
-    addprovidersData: (state, action) => {
+    addProvidersData: (state, action) => {
       const { key, value } = action.payload;
       state.providersData = {
         ...state.providersData,
@@ -30,6 +30,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setMode, setProviders, addprovidersData, setSelectedProvider } =
+export const { setMode, setProviders, addProvidersData, setSelectedProvider } =
   authSlice.actions;
 export default authSlice.reducer;

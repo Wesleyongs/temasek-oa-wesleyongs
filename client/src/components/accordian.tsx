@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setSelectedProvider, addprovidersData } from "../state";
+import { setSelectedProvider, addProvidersData } from "../state";
 
 import { ApiResponse, ProviderData } from "../shared/types";
 import styles from "./accordian.module.css";
@@ -19,9 +19,28 @@ const Accordion: React.FC<AccordionProps> = ({ providerName, content }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  /* State variables */
+  const providersData = useSelector((state: any) => state.providersData);
+
+  /* Function to set provider data and update state variables */
+  const setProviderDataAndState = (providerData: ProviderData) => {
+    setproviderData(providerData);
+    setProviderTitle(providerData.info.title);
+    setProviderLogo(providerData.info["x-logo"]["url"]);
+  };
+
   /* FETCH provider data */
   const getproviderData = async (providerName: string) => {
     try {
+      // Check if providerData with the key exists in providersData
+      const cachedProviderData = providersData[providerName];
+
+      if (cachedProviderData) {
+        setProviderDataAndState(cachedProviderData);
+        console.log(`in cache`);
+        return; // Exit the function early, as data is already available in the cache
+      }
+
       const response = await fetch(
         `https://api.apis.guru/v2/${providerName}.json`
       );
@@ -29,12 +48,10 @@ const Accordion: React.FC<AccordionProps> = ({ providerName, content }) => {
       const valuesArray = Object.values(data.apis);
       const providerData: ProviderData = valuesArray[0];
 
-      setproviderData(providerData);
-      setProviderTitle(providerData.info.title);
-      setProviderLogo(providerData.info["x-logo"]["url"]);
-
       // save provider info to cache
-      dispatch(addprovidersData({ key: providerName, value: providerData }));
+      console.log("here:)");
+      dispatch(addProvidersData({ key: providerName, value: providerData }));
+      setProviderDataAndState(providerData);
     } catch (error) {
       console.error(
         `Failed to fetch data for provider: ${providerName}`,
@@ -59,7 +76,7 @@ const Accordion: React.FC<AccordionProps> = ({ providerName, content }) => {
       </div>
       {isOpen && (
         <div
-          className={styles["content-wrapper"]}
+          className={`${styles["content-wrapper"]} ${styles.slide}`}
           onClick={() => navigate("/provider")}
         >
           <img className={styles.logo} src={providerLogo} alt="Provider Logo" />
