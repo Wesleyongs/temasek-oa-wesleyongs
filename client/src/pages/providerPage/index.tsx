@@ -69,7 +69,11 @@ const ProviderPage: React.FC<ProviderPageProps> = () => {
             </tr>
           </table>
         </div>
-        <button onClick={() => navigate("/")}>Explore more APIs</button>
+        <button
+          onClick={() => navigate("/", { state: { isSidebarOpen: true } })}
+        >
+          Explore more APIs
+        </button>
       </div>
     </div>
   );

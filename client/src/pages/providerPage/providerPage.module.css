@@ -30,7 +30,7 @@
   min-height: 90vh;
   display: flex;
   flex-direction: column;
-  border: black solid;
+  /* border: black solid; */
   color: white;
   align-items: flex-start;
   padding: 0 2rem;

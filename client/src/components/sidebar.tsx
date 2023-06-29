@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setProviders } from "../state";
+import {  setProviders } from "../state";
 import Accordion from "./accordian";
 import "./sidebar.css";
 
@@ -41,8 +41,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           {providers.map((provider) => (
             <Accordion
               key={provider}
+              isItemOpen={false}
               providerName={provider}
-              content="content"
             />
           ))}
         </div>

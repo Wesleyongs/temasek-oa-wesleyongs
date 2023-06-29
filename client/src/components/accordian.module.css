@@ -7,8 +7,6 @@ h1 {
 .content-wrapper {
   display: flex;
   align-items: center;
-  margin-right: 1rem;
-  margin-left: 1rem;
 }
 
 .logo {
@@ -18,52 +16,51 @@ h1 {
 }
 
 .accordion {
-  padding: 1rem;
+  /* border: black solid; */
   border-radius: 0.5rem;
-  margin-bottom: 0.625rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin: 1rem 1rem;
   color: white;
-  transition: background-color 0.3s ease-in-out;
+  height: 2.5rem;
+  transition: height 0.3s, background-color 0.3s;
 }
 
 .accordion.open {
   background-color: #141c24;
-  max-height: 20rem;
+  height: 5rem;
+  transition: height 0.3s, background-color 0.3s;
 }
 
-.accordion > * {
-  max-height: 0;
+.accordion .content-wrapper {
   overflow: hidden;
-  transition: max-height 0.3s ease-in-out;
+  height: 0;
 }
 
-.accordion.open > * {
-  max-height: 100px; /* Adjust the value based on your content's height */
+.accordion.open .content-wrapper {
+  height: 25%;
+  transition: height 0.3s, background-color 0.3s;
 }
 
+.accordion h3 {
+  height: 1rem;
+}
 .accordion-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.625rem;
-  background-color: inherit;
   cursor: pointer;
-}
-
-.accordion-header h3 {
-  margin: 0;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
 }
 
 .accordion-header span {
   font-size: 0.75rem;
+  transition: transform 0.3s;
 }
 
-.accordion-content {
-  overflow: hidden;
+.accordion.open span {
+  transform: rotate(180deg);
+  transition: transform 0.3s;
 }
 
 .accordion:hover {

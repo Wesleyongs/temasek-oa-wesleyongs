@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter,
-  Navigate,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import HomePage from "./pages/homePage";
 import ProviderPage from "./pages/providerPage"; // Use PascalCase for imported component name

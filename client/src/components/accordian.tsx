@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setSelectedProvider, addProvidersData } from "../state";
@@ -8,10 +8,10 @@ import styles from "./accordian.module.css";
 
 interface AccordionProps {
   providerName: string;
-  content: string;
+  isItemOpen: boolean;
 }
 
-const Accordion: React.FC<AccordionProps> = ({ providerName, content }) => {
+const Accordion: React.FC<AccordionProps> = ({ providerName, isItemOpen }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [providerData, setproviderData] = useState<ProviderData | null>(null);
   const [providerTitle, setProviderTitle] = useState("");
@@ -21,6 +21,7 @@ const Accordion: React.FC<AccordionProps> = ({ providerName, content }) => {
 
   /* State variables */
   const providersData = useSelector((state: any) => state.providersData);
+  const selectedProvider = useSelector((state: any) => state.selectedProvider);
 
   /* Function to set provider data and update state variables */
   const setProviderDataAndState = (providerData: ProviderData) => {
@@ -68,13 +69,20 @@ const Accordion: React.FC<AccordionProps> = ({ providerName, content }) => {
     dispatch(setSelectedProvider(providerName));
   };
 
+  useEffect(() => {
+    if (selectedProvider === providerName) {
+      console.log(selectedProvider);
+      toggleAccordion();
+    }
+  }, []);
+
   return (
     <div className={`${styles.accordion} ${isOpen ? styles.open : ""}`}>
       <div className={styles["accordion-header"]} onClick={toggleAccordion}>
         <h3>{providerName}</h3>
-        <span>{isOpen ? "▲" : "▼"}</span>
+        <span>{isOpen ? "▼" : "▼"}</span>
       </div>
-      {(
+      {
         <div
           className={`${styles["content-wrapper"]} ${styles.slide}`}
           onClick={() => navigate("/provider")}
@@ -82,7 +90,7 @@ const Accordion: React.FC<AccordionProps> = ({ providerName, content }) => {
           <img className={styles.logo} src={providerLogo} alt="Provider Logo" />
           <div className={styles["accordion-content"]}>{providerTitle}</div>
         </div>
-      )}
+      }
     </div>
   );
 };
