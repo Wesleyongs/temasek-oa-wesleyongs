@@ -1,15 +1,17 @@
 export interface ApiResponse {
   apis: {
-    [key: string]: {
-      added: string;
-      info: ProviderInfo;
-      updated: string;
-      swaggerUrl: string;
-      swaggerYamlUrl: string;
-      openapiVer: string;
-      link: string;
-    };
+    [key: string]: ProviderData;
   };
+}
+
+export interface ProviderData {
+  added: string;
+  info: providerData;
+  updated: string;
+  swaggerUrl: string;
+  swaggerYamlUrl: string;
+  openapiVer: string;
+  link: string;
 }
 
 export interface ProviderInfo {
