@@ -9,7 +9,6 @@ h1 {
   align-items: center;
   margin-right: 1rem;
   margin-left: 1rem;
-  transition-delay: 1s;
 }
 
 .logo {
@@ -19,15 +18,28 @@ h1 {
 }
 
 .accordion {
-  border-radius: 0.25rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
   margin-bottom: 0.625rem;
   margin-left: 2rem;
   margin-right: 2rem;
   color: white;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .accordion.open {
   background-color: #141c24;
+  max-height: 20rem;
+}
+
+.accordion > * {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.accordion.open > * {
+  max-height: 100px; /* Adjust the value based on your content's height */
 }
 
 .accordion-header {
@@ -37,11 +49,13 @@ h1 {
   padding: 0.625rem;
   background-color: inherit;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
 }
 
 .accordion-header h3 {
   margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .accordion-header span {
@@ -49,29 +63,9 @@ h1 {
 }
 
 .accordion-content {
-  max-height: 0; /* Initially hide the content */
   overflow: hidden;
-  padding: 0.625rem;
-  transition: max-height 0.3s ease-in-out; /* Add transition for slide-down effect */
 }
 
-.accordion.open .accordion-content {
-  max-height: 20rem; /* Adjust the value based on your content's height */
-}
-
-.accordion-content:hover {
+.accordion:hover {
   cursor: pointer;
-}
-
-.accordion.open .accordion-content {
-  max-height: 20rem;
-  transition: max-height 0.3s ease-in-out;
-}
-
-.accordion.slide .accordion-content {
-  transition: max-height 0.3s ease-in-out;
-}
-
-.accordion.slide .content-wrapper {
-  max-height: 20rem;
 }
