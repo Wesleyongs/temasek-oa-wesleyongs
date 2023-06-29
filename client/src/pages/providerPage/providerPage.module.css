@@ -19,26 +19,24 @@
 
 .wrapper {
   background-color: #44647b;
-  height: 100vh; /* Set the height to full viewport height */
-  min-height: 100%; /* In case content gets too much, will expand */
-  overflow-y: auto;
-  padding: 2rem;
-  box-sizing: border-box; /* Include padding within the height */
+  min-height: 100vh; /* Set a minimum height of the viewport */
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2rem;
 }
 
 .container {
-  min-height: 100%; /* In case content gets too much, will expand */
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
-  /* border: black solid; */
+  border: black solid;
   color: white;
   align-items: flex-start;
   padding: 0 2rem;
-  height: 90%;
   width: 80rem;
+  flex: 1; /* Allow the container to grow and occupy available space */
+  overflow-x: hidden;
 }
 
 button {
