@@ -8,22 +8,24 @@
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Adjust the height as needed */
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Adjust the height as needed */
+}
 
 button {
   color: white;
   background-color: #59bde1;
-  padding: 10px 20px;
   border-radius: 5px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   transition: background-color 0.3s ease;
   cursor: pointer;
+  width: 15rem;
+  height: 3rem;
+  font-size: x-large;
 }
 
 button:hover {
@@ -33,4 +35,3 @@ button:hover {
 button:focus {
   outline: none;
 }
-

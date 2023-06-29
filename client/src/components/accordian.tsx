@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setSelectedProvider, addProvidersInfo } from "../state";
+import { setSelectedProvider, addprovidersData } from "../state";
 
-import { ApiResponse, ProviderInfo } from "../shared/types";
-import "./accordian.css";
+import { ApiResponse, ProviderData } from "../shared/types";
+import styles from "./accordian.module.css";
 
 interface AccordionProps {
   providerName: string;
@@ -13,28 +13,28 @@ interface AccordionProps {
 
 const Accordion: React.FC<AccordionProps> = ({ providerName, content }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [providerInfo, setProviderInfo] = useState<ProviderInfo | null>(null);
+  const [providerData, setproviderData] = useState<ProviderData | null>(null);
   const [providerTitle, setProviderTitle] = useState("");
   const [providerLogo, setProviderLogo] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   /* FETCH provider data */
-  const getProviderInfo = async (providerName: string) => {
+  const getproviderData = async (providerName: string) => {
     try {
       const response = await fetch(
         `https://api.apis.guru/v2/${providerName}.json`
       );
       const data: ApiResponse = await response.json();
       const valuesArray = Object.values(data.apis);
-      const providerInfo: ProviderInfo = valuesArray[0]["info"];
+      const providerData: ProviderData = valuesArray[0];
 
-      setProviderInfo(providerInfo);
-      setProviderTitle(providerInfo.title);
-      setProviderLogo(providerInfo["x-logo"]["url"]);
+      setproviderData(providerData);
+      setProviderTitle(providerData.info.title);
+      setProviderLogo(providerData.info["x-logo"]["url"]);
 
       // save provider info to cache
-      dispatch(addProvidersInfo({ key: providerName, value: providerInfo }));
+      dispatch(addprovidersData({ key: providerName, value: providerData }));
     } catch (error) {
       console.error(
         `Failed to fetch data for provider: ${providerName}`,
@@ -45,22 +45,25 @@ const Accordion: React.FC<AccordionProps> = ({ providerName, content }) => {
 
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
-    if (!providerInfo) {
-      getProviderInfo(providerName);
+    if (!providerData) {
+      getproviderData(providerName);
     }
     dispatch(setSelectedProvider(providerName));
   };
 
   return (
-    <div className={`accordion ${isOpen ? "open" : ""}`}>
-      <div className="accordion-header" onClick={toggleAccordion}>
+    <div className={`${styles.accordion} ${isOpen ? styles.open : ""}`}>
+      <div className={styles["accordion-header"]} onClick={toggleAccordion}>
         <h3>{providerName}</h3>
         <span>{isOpen ? "▲" : "▼"}</span>
       </div>
       {isOpen && (
-        <div className="content-wrapper" onClick={() => navigate("/provider")}>
-          <img className="logo" src={providerLogo} alt="Provider Logo" />
-          <div className="accordion-content">{providerTitle}</div>
+        <div
+          className={styles["content-wrapper"]}
+          onClick={() => navigate("/provider")}
+        >
+          <img className={styles.logo} src={providerLogo} alt="Provider Logo" />
+          <div className={styles["accordion-content"]}>{providerTitle}</div>
         </div>
       )}
     </div>
