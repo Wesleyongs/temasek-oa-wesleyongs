@@ -5,11 +5,14 @@ from typing import List
 import requests
 from fastapi.responses import JSONResponse
 from urllib3 import HTTPResponse
+from sqlalchemy.orm.session import Session
+import sys
 
 # Local Variables
 from src.routes.task1 import crud
 from src.routes.task1 import schemas
-from src.database.database import Base, SessionLocal, engine, get_db
+from src.database.database import get_db
+
 
 # APIRouter creates path operations for item module
 router = APIRouter(
@@ -42,7 +45,14 @@ async def get_exchange_rates(base: schemas.BaseCurrency = Query(default=schemas.
 
 
 @router.get("/update_rates/")
-async def update_rates(db: Session = Depends(get_db)):
+async def handle_update_rates(db: Session = Depends(get_db)):
+    await update_rates(db)
+    return JSONResponse(status_code=200, content={
+        "message": "Successfully created"
+    })
+
+
+async def update_rates(db):
     try:
         fiat_rates = await get_coinbase_exchange_rates("USD", crypto_currency_list)
         for currency, rate in fiat_rates.items():
@@ -50,12 +60,8 @@ async def update_rates(db: Session = Depends(get_db)):
         crypto_rates = await get_coinbase_exchange_rates("USD", fiat_currency_list)
         for currency, rate in crypto_rates.items():
             crud.create_rate(db, "BTC", currency, rate)
-
-        return JSONResponse(status_code=200, content={
-            "message": "Successfully created"
-        })
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise Exception("Failed to update rates: " + str(e))
 
 
 async def get_coinbase_exchange_rates(currency, other_currency_list):
