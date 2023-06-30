@@ -1,0 +1,18 @@
+# Directories
+__pycache__/
+venv/
+.venv/
+dist/
+build/
+*.egg-info/
+.env
+
+# Files
+.env
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.log
+*.tmp
+.DS_Store
