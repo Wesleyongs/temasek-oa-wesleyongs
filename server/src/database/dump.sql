@@ -19,11 +19,13 @@ VALUES
     ('DOGE', 'crypto');
 
 -- Create table structure
-DROP TABLE IF EXISTS rates_daily;
+DROP TABLE IF EXISTS rates;
 
-CREATE TABLE rates_daily (
+CREATE TABLE rates (
     id SERIAL PRIMARY KEY,
-    date TIMESTAMP NOT NULL,
+    timestamp timestamp NOT NULL,
+    base VARCHAR(3) NOT NULL,
     currency_id INT NOT NULL,
+    rate Float NOT NULL,
     FOREIGN KEY (currency_id) REFERENCES currencies (id)
 );
