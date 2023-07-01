@@ -30,6 +30,9 @@ class Rate(Base):
     target_currency = Column(String(5), nullable=False)
     rate = Column(Float, nullable=False)
 
+    class Config:
+        orm_mode = True
+
     def __init__(self, **kwds):
         self.__dict__.update(kwds)
 

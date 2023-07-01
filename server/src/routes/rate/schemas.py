@@ -32,9 +32,13 @@ class HistoricalRatesParams(BaseModel):
 # Responses
 
 
-class HistoricalRatesReponse(BaseModel):
+class HistoricalRate(BaseModel):
     timestamp: int
-    value: float
+    value: str
+
+
+class HistoricalRatesResponse(BaseModel):
+    results: List[HistoricalRate]
 
 
 class FiatCurrency(BaseModel):
@@ -49,11 +53,7 @@ class CryptoCurrency(BaseModel):
     ETH: str
 
 
-
 class Rate(BaseModel):
     base_currency: str
     target_currency: str
     rate: float
-
-    class Config:
-        orm_mode = True

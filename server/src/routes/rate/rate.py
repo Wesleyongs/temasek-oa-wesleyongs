@@ -52,11 +52,11 @@ async def handle_update_rates(db: Session = Depends(get_db)):
         raise HTTPException(status_code=500, detail=f"Error ingesting CB rates: {e}")
 
 
-@router.get("/historical-rates")
-async def get_rates(
+@router.get("/historical-rates", response_model=schemas.HistoricalRatesResponse)
+async def handle_get_historical_rates(
     params: schemas.HistoricalRatesParams = Depends(),
     db: Session = Depends(get_db),
-) -> Dict["result", List[schemas.HistoricalRatesReponse]]:
+):
     try:
         rates = await crud.get_rates(
             db,
@@ -65,16 +65,14 @@ async def get_rates(
             params.base_currency,
             params.target_currency,
         )
-
         response = []
         for rate in rates:
             response.append(
-                schemas.HistoricalRatesReponse(
+                schemas.HistoricalRate(
                     timestamp=int(rate.timestamp.timestamp() * 1000), value=rate.rate
                 )
             )
-
-        return {"result": response}
+        return schemas.HistoricalRatesResponse(results=response)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
