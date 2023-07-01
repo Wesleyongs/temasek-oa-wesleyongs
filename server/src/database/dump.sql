@@ -24,8 +24,7 @@ DROP TABLE IF EXISTS rates;
 CREATE TABLE rates (
     id SERIAL PRIMARY KEY,
     timestamp timestamp NOT NULL,
-    base VARCHAR(3) NOT NULL,
-    currency_id INT NOT NULL,
-    rate Float NOT NULL,
-    FOREIGN KEY (currency_id) REFERENCES currencies (id)
+    base_currency VARCHAR(5) NOT NULL,
+    target_currency VARCHAR(5) NOT NULL,
+    rate Float NOT NULL
 );

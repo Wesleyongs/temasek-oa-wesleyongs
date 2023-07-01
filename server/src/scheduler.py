@@ -1,18 +1,33 @@
-from apscheduler.schedulers.background import BackgroundScheduler
+import logging
 import asyncio
+from apscheduler.schedulers.background import BackgroundScheduler
+from src.routes.rate import rate
 from src.database.database import SessionLocal
-from src.routes.task1 import task1
-from src.database.database import get_db
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(name)s - %(message)s",
+    filename="scheduler.log",
+    filemode="a",
+)
+
+logger = logging.getLogger("scheduler")
+
 
 def update_rates_scheduler():
-    print("Updating rates...")
     try:
-        # Await the update_rates function
-        asyncio.run(task1.update_rates(get_db()))
+        asyncio.run(rate.update_rates(SessionLocal()))
+        logger.info("Rates updated successfully")
     except Exception as e:
-        raise Exception("Failed to update rates: " + str(e))
+        logger.error("Failed to update rates: %s", str(e), exc_info=True)
+
 
 def init_scheduler():
+    # Create and configure the scheduler
     scheduler = BackgroundScheduler()
-    scheduler.add_job(update_rates_scheduler, 'cron', second='*/10')
+    scheduler.add_job(update_rates_scheduler, "cron", minute="*/5")
+
+    # Start the scheduler
     scheduler.start()
+    logger.info("Scheduler started successfully")

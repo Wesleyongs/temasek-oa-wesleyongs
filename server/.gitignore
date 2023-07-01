@@ -8,6 +8,8 @@ build/
 .env
 
 # Files
+config.json
+.vscode
 .env
 *.pyc
 *.pyo
