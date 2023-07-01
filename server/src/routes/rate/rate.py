@@ -1,5 +1,5 @@
-from typing import Dict, List
-
+from typing import Union
+import json
 import requests
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
@@ -10,28 +10,36 @@ router = APIRouter(
     prefix="", tags=["rates"], responses={404: {"description": "Not found"}}
 )
 
-currency_list = (
-    schemas.FiatCurrency.__annotations__.keys()
-    | schemas.CryptoCurrency.__annotations__.keys()
+# Load configuration from JSON file
+with open("src/config.json") as config_file:
+    COINBASE_URL = json.load(config_file)["coinbase_url"]
+
+CURRENCY_DICT = {
+    "fiat": list(schemas.FiatCurrency.__annotations__.keys()),
+    "crypto": list(schemas.CryptoCurrency.__annotations__.keys()),
+}
+CURRENCY_LIST = CURRENCY_DICT["fiat"] + CURRENCY_DICT["crypto"]
+
+
+@router.get(
+    "/rates",
+    response_model=Union[
+        schemas.ExchangeRatesResponseFiat, schemas.ExchangeRatesResponseCrypto
+    ],
 )
-
-
-@router.get("/rates")
 async def handle_get_exchange_rates(
     base: schemas.CurrencyTypes = Query(default=schemas.CurrencyTypes.fiat),
 ):
     try:
-        selected_currency_list = currency_list - (
-            schemas.FiatCurrency.__annotations__.keys()
-            if base == "crypto"
-            else schemas.CryptoCurrency.__annotations__.keys()
+        selected_CURRENCY_LIST = CURRENCY_DICT[base]
+        other_CURRENCY_LIST = (
+            CURRENCY_DICT["fiat"] if base == "crypto" else CURRENCY_DICT["crypto"]
         )
-        other_currency_list = currency_list - selected_currency_list
 
         response = {}
-        for base_currency in selected_currency_list:
+        for base_currency in selected_CURRENCY_LIST:
             exchange_rates = await get_coinbase_exchange_rates(
-                base_currency, other_currency_list
+                base_currency, other_CURRENCY_LIST
             )
             response[base_currency] = exchange_rates
 
@@ -43,7 +51,7 @@ async def handle_get_exchange_rates(
         )
 
 
-@router.put("/update_rates/")
+@router.put("/update_rates/", response_model=schemas.Message)
 async def handle_update_rates(db: Session = Depends(get_db)):
     try:
         res = await update_rates(db)
@@ -79,8 +87,8 @@ async def handle_get_historical_rates(
 
 async def update_rates(db: Session):
     rate_objects = []
-    for base_currency in currency_list:
-        exchange_rates = await get_coinbase_exchange_rates(base_currency, currency_list)
+    for base_currency in CURRENCY_LIST:
+        exchange_rates = await get_coinbase_exchange_rates(base_currency, CURRENCY_LIST)
         for target_currency, rate in exchange_rates.items():
             rate_objects.append(
                 models.Rate(
@@ -93,15 +101,10 @@ async def update_rates(db: Session):
     return rate_objects
 
 
-async def get_coinbase_exchange_rates(currency, other_currency_list):
-    response = requests.get(
-        f"https://api.coinbase.com/v2/exchange-rates?currency={currency}"
-    )
-    response.raise_for_status()
+async def get_coinbase_exchange_rates(currency, currency_list):
+    response = requests.get(f"{COINBASE_URL}{currency}")
     data = response.json()
     all_exchange_rates = data["data"]["rates"]
     return {
-        key: value
-        for key, value in all_exchange_rates.items()
-        if key in other_currency_list
+        key: value for key, value in all_exchange_rates.items() if key in currency_list
     }
