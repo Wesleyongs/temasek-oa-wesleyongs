@@ -53,7 +53,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
       >
         <div className={`overlay-background`} onClick={onClose} />
         <div className={`overlay-container`}>
-          <h1>Select provider</h1>
+          <h1>Select Provider</h1>
           {error ? (
             <span>{error}</span>
           ) : (
