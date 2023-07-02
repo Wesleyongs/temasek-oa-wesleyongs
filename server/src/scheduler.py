@@ -1,7 +1,7 @@
 import logging
 import asyncio
 from apscheduler.schedulers.background import BackgroundScheduler
-from src.routes.rate import rate
+from src.services.rate import update_rates
 from src.database.database import SessionLocal
 
 # Configure logging
@@ -17,7 +17,7 @@ logger = logging.getLogger("scheduler")
 
 def update_rates_scheduler():
     try:
-        asyncio.run(rate.update_rates(SessionLocal()))
+        asyncio.run(update_rates(SessionLocal()))
         logger.info("Rates updated successfully")
     except Exception as e:
         logger.error("Failed to update rates: %s", str(e), exc_info=True)
