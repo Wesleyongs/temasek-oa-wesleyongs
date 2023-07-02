@@ -25,7 +25,9 @@ async def get_coinbase_exchange_rates(
     data = response.json()
     all_exchange_rates = data["data"]["rates"]
     return {
-        key: value for key, value in all_exchange_rates.items() if key in currency_list
+        key: round(float(value), 2) if float(value) > 1 else value
+        for key, value in all_exchange_rates.items()
+        if key in currency_list
     }
 
 
