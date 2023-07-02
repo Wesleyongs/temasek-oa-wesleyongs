@@ -1,6 +1,6 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {  setProviders } from "../state";
+import { ReduxState, setProviders } from "../state";
 import Accordion from "./accordian";
 import "./sidebar.css";
 
@@ -9,42 +9,55 @@ interface SidebarProps {
   onClose: () => void;
 }
 
-interface Providers {
+interface ProvidersResponse {
   data: string[];
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
-  const providers: string[] = useSelector((state: any) => state.providers);
+  const providers: string[] = useSelector(
+    (state: ReduxState) => state.providers
+  );
+  const [error, setError] = useState<string | null>(null);
 
   /* API CALL function */
   const getProviders = async () => {
-    const response = await fetch(`https://api.apis.guru/v2/providers.json`, {
-      method: "GET",
-    });
-    const data: Providers = await response.json();
-    dispatch(setProviders({ providers: data.data }));
+    try {
+      const response = await fetch(`https://api.apis.guru/v2/providers.json`, {
+        method: "GET",
+      });
+      const data: ProvidersResponse = await response.json();
+      dispatch(setProviders({ providers: data.data }));
+    } catch (error) {
+      console.error("Error fetching providers:", error);
+      setError("Failed to fetch providers. Please try again later.");
+    }
   };
 
   useEffect(() => {
     if (providers.length === 0) {
       getProviders(); // fetch data and update state when component is mounted, does not run again when component rerenders as dependancy array is blank
     }
+    setError(null);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Fragment>
       <div className={`overlay ${isOpen ? "open" : ""}`}>
-        <div className={`overlay__background`} onClick={onClose} />
-        <div className={`overlay__container`}>
+        <div className={`overlay-background`} onClick={onClose} />
+        <div className={`overlay-container`}>
           <h1>Select provider</h1>
-          {providers.map((provider) => (
-            <Accordion
-              key={provider}
-              isItemOpen={false}
-              providerName={provider}
-            />
-          ))}
+          {error ? (
+            <span>{error}</span>
+          ) : (
+            providers.map((provider) => (
+              <Accordion
+                key={provider}
+                isItemOpen={false}
+                providerName={provider}
+              />
+            ))
+          )}
         </div>
       </div>
     </Fragment>

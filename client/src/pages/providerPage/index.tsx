@@ -1,27 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../../components/sidebar";
-import { ApiResponse, ProviderData } from "../../shared/types";
+import { ProviderData } from "../../shared/types";
+import { ReduxState } from "../../state";
 import styles from "./providerPage.module.css";
 
-interface ProviderPageProps {
-  // Define your component props here
-}
+interface ProviderPageProps {}
 
 const ProviderPage: React.FC<ProviderPageProps> = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const selectedProvider = useSelector((state: any) => state.selectedProvider);
-  const providersData = useSelector((state: any) => state.providersData);
-
+  const selectedProvider = useSelector(
+    (state: ReduxState) => state.selectedProvider
+  );
+  const providersData = useSelector((state: ReduxState) => state.providersData);
   const [selectedproviderData, setSelectedproviderData] =
     useState<ProviderData | null>(null);
 
   useEffect(() => {
-    // Update the selectedproviderData state using the selectedProvider and providersData
-    console.log(selectedProvider);
-    console.log(providersData);
     if (selectedProvider && providersData) {
       setSelectedproviderData(providersData[selectedProvider] || null);
     }
@@ -69,11 +64,7 @@ const ProviderPage: React.FC<ProviderPageProps> = () => {
             </tr>
           </table>
         </div>
-        <button
-          onClick={() => navigate("/", { state: { isSidebarOpen: true } })}
-        >
-          Explore more APIs
-        </button>
+        <button onClick={() => navigate("/")}>Explore more APIs</button>
       </div>
     </div>
   );

@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { toggleSideBar } from "../../state";
 import Sidebar from "../../components/sidebar";
 import { useDispatch, useSelector } from "react-redux";
+import { ReduxState } from "../../state";
 
 interface HomePageProps {}
 
 const HomePage: React.FC<HomePageProps> = () => {
   const isSidebarOpen: boolean = useSelector(
-    (state: any) => state.isSidebarOpen
+    (state: ReduxState) => state.isSidebarOpen
   );
   const [isOpen, setIsOpen] = useState(isSidebarOpen);
   const dispatch = useDispatch();

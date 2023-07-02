@@ -1,6 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { ProviderData } from "../shared/types";
 
-const initialState = {
+export interface ReduxState {
+  isSidebarOpen: boolean;
+  providers: string[];
+  providersData: Record<string, ProviderData>;
+  selectedProvider: string;
+}
+
+const initialState: ReduxState = {
   isSidebarOpen: false,
   providers: [],
   providersData: {},
@@ -36,4 +44,5 @@ export const {
   addProvidersData,
   setSelectedProvider,
 } = authSlice.actions;
+
 export default authSlice.reducer;

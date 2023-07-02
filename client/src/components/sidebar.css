@@ -12,7 +12,7 @@
   right: 0;
 }
 
-.overlay__background {
+.overlay-background {
   background-color: rgba(0, 0, 0, 0.5);
   width: 70vw;
   height: 100vh;
@@ -21,11 +21,8 @@
   z-index: 9;
 }
 
-/* .overlay.open .overlay__background {
-} */
-
-.overlay__container{
-  background-color: #3c647c ;
+.overlay-container {
+  background-color: #3c647c;
   position: fixed;
   height: 100vh;
   width: 40vw;
@@ -33,13 +30,12 @@
   right: -40vw;
   transition: right 0.1s ease-in-out;
   overflow: auto;
-
 }
 
-.overlay__container::-webkit-scrollbar{
+.overlay-container::-webkit-scrollbar {
   display: none;
 }
 
-.overlay.open .overlay__container {
+.overlay.open .overlay-container {
   right: 0;
 }

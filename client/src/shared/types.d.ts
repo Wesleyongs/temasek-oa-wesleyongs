@@ -6,7 +6,7 @@ export interface ApiResponse {
 
 export interface ProviderData {
   added: string;
-  info: providerData;
+  info: ProviderInfo;
   updated: string;
   swaggerUrl: string;
   swaggerYamlUrl: string;
