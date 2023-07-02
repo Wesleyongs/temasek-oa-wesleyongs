@@ -1,7 +1,5 @@
-from src.routes.rate import models
-import datetime as dt
-import time
-from src.routes.rate import schemas
+from src.models import rate as models
+from src.schemas import rate as schemas
 from typing import List
 
 
