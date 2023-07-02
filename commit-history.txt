@@ -1,0 +1,200 @@
+commit 21045949c74aaac610dd9b30d660618e92e2ac78
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Sun Jul 2 21:52:58 2023 +0800
+
+    BE: restructure backend
+    
+    1. all import start with src.
+    Organised around the following folders:
+    1. crud
+    2. models (sql alchemy models)
+    3. schemas (pydanic schemas for req, res validations)
+    4. routes
+    5. services for business logics
+    6. utils for generic helper functions like utc conversion
+
+commit bd941a12fa54ec82430bd34511e7d272b44bc988
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Sun Jul 2 21:50:49 2023 +0800
+
+    FE: bugfix background colors wrong due to overlay effect
+
+commit b7effcb2685b65d0ba59f584e151684da9533694
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Sun Jul 2 19:59:22 2023 +0800
+
+    FE: add additional animations to sidebar
+    
+    1. overlay lightens slightly when accordion is toggled
+    2. sidebar slightly expands when accordion is toggled
+
+commit 923907d463aacd10d57f7c3fe6ce76da03f7dcb3
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Sun Jul 2 15:42:42 2023 +0800
+
+    FE: add additional features to accordion
+    
+    1. Single select (previously multi)
+    2. error handling when fetch fails
+
+commit 85fb93591af282a7f0f791f0b4edcee7f50bae30
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Sun Jul 2 15:41:50 2023 +0800
+
+    BE: add backend requirements file
+
+commit cefba2e8653d100870617b13de7cc4a4af2c0215
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Sun Jul 2 01:09:14 2023 +0800
+
+    BE: add pydanic schema for all endpoints (req, res validations)
+
+commit 856746521438c59640d7c05a521c9b89a462dd05
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Sat Jul 1 19:48:49 2023 +0800
+
+    BE: bugfix historical-rates response_model
+
+commit 9a55bfcd309b92634b32dcf2fa54e4f75d2f86ea
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Sat Jul 1 19:29:49 2023 +0800
+
+    BE: task3 add endpoint to query historical rates
+    
+    Small changes:
+    1. Renamed route to "rates"
+    2. Change config from py to json (language agnostic)
+
+commit dd4dd3abd19fb9a611bcafca8a662951026d8d0d
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Sat Jul 1 01:19:02 2023 +0800
+
+    BE: task2 scheduler to ingest exchange rates db
+    
+    1. schedule is currently on 5min cron
+
+commit af098c6a7733ceff21cd0b5114ece3ed2a3e9366
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Fri Jun 30 21:11:56 2023 +0800
+
+    BE: Feat task2 api to ingest into postgres
+
+commit cbf1efaa6f0e12f12d8cd4cb50c23fe38eb36257
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Fri Jun 30 17:27:35 2023 +0800
+
+    BE: setup postgres db connection
+
+commit c10b3c9bda11c5c6e4790f44b1bcf420ec204796
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Fri Jun 30 17:06:58 2023 +0800
+
+    BE: Feat task1
+
+commit 1b65d40958d771047b65759ad7bbb67031de2bf7
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Fri Jun 30 17:06:38 2023 +0800
+
+    BE: Add routes
+
+commit 138d4e04c2b51ddf1ecf6eebf073c8de9728b147
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Fri Jun 30 17:06:19 2023 +0800
+
+    BE: Initial commit backend
+
+commit f3853c0d7a0478f07547bb7c39587cf65e111670
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Fri Jun 30 00:20:00 2023 +0800
+
+    Improve accordion animation
+    
+    1. Smoothen the transition effect
+    2. Add rotation effect on the drop down arrow
+
+commit da0835c48163d2c8cc515d9d4661f22fc64f3ca9
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Thu Jun 29 16:54:54 2023 +0800
+
+    Feat: Add animation when toggling accordion
+
+commit b4653bfb979dbf4071f3a11d7581276020dafd2f
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Thu Jun 29 16:29:31 2023 +0800
+
+    Feat: Accordion to cache providerData to reduce API calls
+
+commit e59372a7b39248cac723ec346da59a110dc6d68c
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Thu Jun 29 15:40:21 2023 +0800
+
+    Fix: providerPage not overflowing when context > 100vh
+
+commit f7fb50c9ad73af9714590f8fa43358c1f2a8e700
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Thu Jun 29 15:29:07 2023 +0800
+
+    Feat: Complete implementation of ProviderPage
+
+commit a78716b4a221a874c49e050dc9eb56713f3dec27
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Thu Jun 29 15:27:27 2023 +0800
+
+    Refactor: Accordian css into module.css
+
+commit b2666a48cf130dde69eeeb836482e92c9221ef79
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Thu Jun 29 15:27:00 2023 +0800
+
+    Refactor: Complex API interface into smaller
+
+commit 32f20854bdcf0fc607e8a36d67c79050e92965b8
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Thu Jun 29 00:32:47 2023 +0800
+
+    Refactor: Move shared interfaces to a seperate dir
+
+commit 4e622725b7f6fcc810c4f95a5c0a1ad6d1189c71
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Wed Jun 28 16:55:40 2023 +0800
+
+    Add routes, organized pages (previously scenes)
+    
+    1. HomePage: has the child components accordion & sidebar
+    2. ProductPage
+
+commit af376d86338db40ff617270356a5c0e78d78627b
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Wed Jun 28 16:01:20 2023 +0800
+
+    Render accordian on sidebar
+
+commit bdf33cc56b5ff66f4d122047decad17768368a7c
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Wed Jun 28 12:53:19 2023 +0800
+
+    Fetch and store providersNames on load
+
+commit 56a29a12a23daa98b3e2c8cecf5604595533a134
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Tue Jun 27 19:24:45 2023 +0800
+
+    Setup Redux for persist storage
+
+commit e404bbe8b83bcabb70780f9e6c2bead5971ec6ce
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Tue Jun 27 15:26:43 2023 +0800
+
+    Remove redundant code from overlay component
+
+commit 181a04827ac07b506d900a2c69b3e9271f54f1c4
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Tue Jun 27 15:04:29 2023 +0800
+
+    Create mainpage with overlay & overlay animation
+
+commit 979105227de59385949c7a17e3503340a6454677
+Author: Wesley Ong <72511481+Wesleyongs@users.noreply.github.com>
+Date:   Mon Jun 26 21:00:07 2023 +0800
+
+    Initial commit
