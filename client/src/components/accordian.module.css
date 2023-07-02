@@ -4,6 +4,10 @@ h1 {
   font-size: 1.5rem;
 }
 
+h3 {
+  font-weight: 200;
+}
+
 .content-wrapper {
   display: flex;
   align-items: center;
@@ -21,14 +25,14 @@ h1 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   padding-bottom: 0.5rem;
-  margin: 1rem 1rem;
+  margin: 0.5rem;
   color: white;
   height: 2.5rem;
   transition: height 0.3s, background-color 0.3s;
 }
 
 .accordion.open {
-  background-color: #141c24;
+  background-color: #1a2632;
   height: 5rem;
   transition: height 0.3s, background-color 0.3s;
 }
@@ -43,9 +47,7 @@ h1 {
   transition: height 0.3s, background-color 0.3s;
 }
 
-.accordion h3 {
-  height: 1rem;
-}
+
 .accordion-header {
   display: flex;
   align-items: center;

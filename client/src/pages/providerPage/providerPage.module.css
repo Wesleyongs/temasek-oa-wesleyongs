@@ -10,20 +10,21 @@
   padding: 1rem;
 }
 .hero > img {
-  width: 5rem;
+  width: 10rem;
   height: auto;
 }
 .hero > * h1 {
-  font-size: 3rem;
+  font-size: 5rem;
+  font-weight: 300;
 }
 
 .wrapper {
-  background-color: #44647b;
+  background-color: #42607b;
   min-height: 100vh; /* Set a minimum height of the viewport */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 2rem 6rem;
 }
 
 .container {

@@ -5,11 +5,16 @@
   height: 100vh;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  transition: right 0.1s ease-in-out;
+  transition: right 0.3s ease-in-out;
 }
 
 .overlay.open {
   right: 0;
+}
+
+.overlay.open.accordion-item-open {
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: right 0.3s ease-in-out;
 }
 
 .overlay-background {
@@ -27,8 +32,8 @@
   height: 100vh;
   width: 40vw;
   z-index: 10;
-  right: -40vw;
-  transition: right 0.1s ease-in-out;
+  right: -100vw;
+  transition: right 0.3s ease-in-out, width 0.3s ease-in-out;
   overflow: auto;
 }
 
@@ -38,4 +43,8 @@
 
 .overlay.open .overlay-container {
   right: 0;
+}
+
+.overlay.open.accordion-item-open .overlay-container {
+  width: 42vw;
 }

@@ -18,6 +18,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const providers: string[] = useSelector(
     (state: ReduxState) => state.providers
   );
+  const selectedProvider: string = useSelector(
+    (state: ReduxState) => state.selectedProvider
+  );
   const [error, setError] = useState<string | null>(null);
 
   /* API CALL function */
@@ -43,7 +46,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
   return (
     <Fragment>
-      <div className={`overlay ${isOpen ? "open" : ""}`}>
+      <div
+        className={`overlay ${isOpen ? "open" : ""} ${
+          selectedProvider !== "" ? "accordion-item-open" : ""
+        }`}
+      >
         <div className={`overlay-background`} onClick={onClose} />
         <div className={`overlay-container`}>
           <h1>Select provider</h1>

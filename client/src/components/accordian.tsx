@@ -14,21 +14,12 @@ interface AccordionProps {
 const Accordion: React.FC<AccordionProps> = ({ providerName, isItemOpen }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [providerData, setproviderData] = useState<ProviderData | null>(null);
-  const [providerTitle, setProviderTitle] = useState("");
-  const [providerLogo, setProviderLogo] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   /* State variables */
   const providersData = useSelector((state: any) => state.providersData);
   const selectedProvider = useSelector((state: any) => state.selectedProvider);
-
-  /* Function to set provider data and update state variables */
-  const setProviderDataAndState = (providerData: ProviderData) => {
-    setproviderData(providerData);
-    setProviderTitle(providerData.info.title);
-    setProviderLogo(providerData.info["x-logo"]["url"]);
-  };
 
   /* FETCH provider data */
   const getproviderData = async (providerName: string) => {
@@ -37,7 +28,7 @@ const Accordion: React.FC<AccordionProps> = ({ providerName, isItemOpen }) => {
       const cachedProviderData = providersData[providerName];
 
       if (cachedProviderData) {
-        setProviderDataAndState(cachedProviderData);
+        setproviderData(cachedProviderData);
         console.log(`in cache`);
         return; // Exit the function early, as data is already available in the cache
       }
@@ -50,9 +41,8 @@ const Accordion: React.FC<AccordionProps> = ({ providerName, isItemOpen }) => {
       const providerData: ProviderData = valuesArray[0];
 
       // save provider info to cache
-      console.log("here:)");
       dispatch(addProvidersData({ key: providerName, value: providerData }));
-      setProviderDataAndState(providerData);
+      setproviderData(providerData);
     } catch (error) {
       console.error(
         `Failed to fetch data for provider: ${providerName}`,
@@ -66,12 +56,13 @@ const Accordion: React.FC<AccordionProps> = ({ providerName, isItemOpen }) => {
     if (!providerData) {
       getproviderData(providerName);
     }
-    dispatch(setSelectedProvider(providerName));
+    dispatch(setSelectedProvider(isOpen ? "" : providerName));
   };
 
   useEffect(() => {
     if (selectedProvider === providerName) {
       setIsOpen(true);
+      setproviderData(providersData[providerName]);
     } else {
       setIsOpen(false);
     }
@@ -88,8 +79,13 @@ const Accordion: React.FC<AccordionProps> = ({ providerName, isItemOpen }) => {
           className={`${styles["content-wrapper"]} ${styles.slide}`}
           onClick={() => navigate("/provider")}
         >
-          <img className={styles.logo} src={providerLogo} alt="Provider Logo" />
-          <div className={styles["accordion-content"]}>{providerTitle}</div>
+          <img
+            className={styles.logo}
+            src={providerData?.info["x-logo"]["url"]}
+          />
+          <div className={styles["accordion-content"]}>
+            {providerData?.info.title}
+          </div>
         </div>
       }
     </div>

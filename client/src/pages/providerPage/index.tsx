@@ -20,7 +20,7 @@ const ProviderPage: React.FC<ProviderPageProps> = () => {
     if (selectedProvider && providersData) {
       setSelectedproviderData(providersData[selectedProvider] || null);
     }
-  }, [selectedProvider, providersData]);
+  }, []);
 
   return (
     <div className={styles.wrapper}>
@@ -44,24 +44,26 @@ const ProviderPage: React.FC<ProviderPageProps> = () => {
         <div>
           <h2>Contact</h2>
           <table>
-            <tr>
-              <td>Email</td>
-              <td>
-                {selectedproviderData?.info?.contact?.email ?? "Missing data"}
-              </td>
-            </tr>
-            <tr>
-              <td>Name</td>
-              <td>
-                {selectedproviderData?.info?.contact?.name ?? "Missing data"}
-              </td>
-            </tr>
-            <tr>
-              <td>URL</td>
-              <td>
-                {selectedproviderData?.info?.contact?.url ?? "Missing data"}
-              </td>
-            </tr>
+            <tbody>
+              <tr>
+                <td>Email</td>
+                <td>
+                  {selectedproviderData?.info?.contact?.email ?? "Missing data"}
+                </td>
+              </tr>
+              <tr>
+                <td>Name</td>
+                <td>
+                  {selectedproviderData?.info?.contact?.name ?? "Missing data"}
+                </td>
+              </tr>
+              <tr>
+                <td>URL</td>
+                <td>
+                  {selectedproviderData?.info?.contact?.url ?? "Missing data"}
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
         <button onClick={() => navigate("/")}>Explore more APIs</button>
