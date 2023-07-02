@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setSelectedProvider, addProvidersData } from "../state";
+import { addProvidersData, setSelectedProvider } from "../state";
 
 import { ApiResponse, ProviderData } from "../shared/types";
 import styles from "./accordian.module.css";
@@ -71,16 +71,17 @@ const Accordion: React.FC<AccordionProps> = ({ providerName, isItemOpen }) => {
 
   useEffect(() => {
     if (selectedProvider === providerName) {
-      console.log(selectedProvider);
-      toggleAccordion();
+      setIsOpen(true);
+    } else {
+      setIsOpen(false);
     }
-  }, []);
+  }, [selectedProvider]);
 
   return (
     <div className={`${styles.accordion} ${isOpen ? styles.open : ""}`}>
       <div className={styles["accordion-header"]} onClick={toggleAccordion}>
         <h3>{providerName}</h3>
-        <span>{isOpen ? "▼" : "▼"}</span>
+        <span>﹀</span>
       </div>
       {
         <div
