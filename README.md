@@ -44,3 +44,8 @@ If you are using Windows and have Make installed, you can also follow these step
 
 - I chose SQL since the schema has already been defined, we can make use of joins for complex queries as the project develops and new use cases arises
 - Postgres is typically the cheapest option in the SQL family
+
+### Scheduler
+
+- scheduler uses apscheduler since it integrtes well with FastAPI
+- scheduler is set to a 5min cron in the background when FastAPI is running and can be modified at `server\src\scheduler.py`
