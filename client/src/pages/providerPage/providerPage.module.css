@@ -7,17 +7,23 @@
 }
 
 .hero > * {
-  padding: 1rem;
+  padding: 1rem 0.5rem;
 }
 .hero > img {
   width: 10rem;
   height: auto;
 }
-.hero > * h1 {
-  font-size: 5rem;
-  font-weight: 300;
+.hero > h1 {
+  font-size: 2rem;
+  font-weight: 500;
 }
 
+h2 {
+  padding-top: 2rem;
+  font-weight: 400;
+  font-size: 2rem;
+  margin: 0;
+}
 .wrapper {
   background-color: #42607b;
   min-height: 100vh; /* Set a minimum height of the viewport */
@@ -25,6 +31,7 @@
   align-items: center;
   justify-content: center;
   padding: 2rem 6rem;
+  box-sizing: border-box;
 }
 
 .container {
@@ -44,4 +51,8 @@ button {
   margin-top: auto;
   margin-left: auto;
   margin-right: auto;
+}
+
+td {
+  padding-right: 1rem;
 }

@@ -74,7 +74,6 @@ const Accordion: React.FC<AccordionProps> = ({ providerName, isItemOpen }) => {
         <h3>{providerName}</h3>
         <span>﹀</span>
       </div>
-      {
         <div
           className={`${styles["content-wrapper"]} ${styles.slide}`}
           onClick={() => navigate("/provider")}
@@ -87,7 +86,6 @@ const Accordion: React.FC<AccordionProps> = ({ providerName, isItemOpen }) => {
             {providerData?.info.title}
           </div>
         </div>
-      }
     </div>
   );
 };

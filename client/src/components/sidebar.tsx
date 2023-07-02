@@ -21,7 +21,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const selectedProvider: string = useSelector(
     (state: ReduxState) => state.selectedProvider
   );
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string>("");
 
   /* API CALL function */
   const getProviders = async () => {
@@ -41,11 +41,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     if (providers.length === 0) {
       getProviders(); // fetch data and update state when component is mounted, does not run again when component rerenders as dependancy array is blank
     }
-    setError(null);
+    setError("");
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <Fragment>
+    <>
       <div
         className={`overlay ${isOpen ? "open" : ""} ${
           selectedProvider !== "" ? "accordion-item-open" : ""
@@ -67,7 +67,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           )}
         </div>
       </div>
-    </Fragment>
+    </>
   );
 };
 

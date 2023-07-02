@@ -35,6 +35,7 @@
   right: -100vw;
   transition: right 0.3s ease-in-out, width 0.3s ease-in-out;
   overflow: auto;
+  padding: 0 2rem;
 }
 
 .overlay-container::-webkit-scrollbar {
